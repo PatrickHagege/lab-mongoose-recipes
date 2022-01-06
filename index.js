@@ -25,16 +25,22 @@ let spaghetti = {
   level: "Easy Peasy",
   ingredients: ["spaghetti"],
   cuisine: "italian",
-  creator: "Patoche",
+  creator: "me",
   created: Date.now()
 }
 
 Recipe.create(spaghetti)
-  .then(recipe => console.log('The recipe is saved and its value is: ', recipe))
+  .then(recipe =>
+    console.log('The recipe is saved and its value is: ', recipe))
   .catch(error => console.log('An error happened while saving a new urecipe:', error));
 
 Recipe.insertMany(data/*, function(error, recipes) {console.log(recipes)}*/)
-  .then(recipe => console.log('All the recipes from data.json has been saved: ', recipe))
+  .then(recipes => {
+    recipes.forEach(recipe => {
+      console.log('title: ',recipe.title);
+    });
+    // console.log('All the recipes from data.json has been saved: ', recipes)
+  })
   .catch(error => console.log('An error happened while inserting the recipes provided by data :', error));
 
 Recipe.findOneAndUpdate({ title: "Rigatoni alla Genovese" }, { duration: 100 }, { new: true })
